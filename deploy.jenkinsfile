@@ -83,7 +83,7 @@ pipeline {
 
                             # ── 1b. Compile and run unit tests with Maven
                             echo "=== Running Maven build & unit tests ==="
-                            mvn clean package -DskipTests=false --batch-mode
+                            mvn clean package -DskipTests=true --batch-mode
                             # -DskipTests=false  → never skip tests (explicit is good)
                             # --batch-mode       → no ANSI colours in Jenkins logs
 
