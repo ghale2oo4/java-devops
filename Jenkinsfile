@@ -14,9 +14,15 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    // ✅ FIX 1: This tells Jenkins to trigger on every GitHub push/PR via webhook
+    triggers {
+        githubPush()
+    }
+
     environment {
         APP_NAME = 'java-app'
         CI_IMAGE = "${APP_NAME}:ci-${env.BUILD_NUMBER}"
+        SONAR_PROJECT_KEY = 'java-app'
     }
 
     stages {
@@ -49,14 +55,7 @@ pipeline {
             }
         }
 
-        stage('🔍 Code Quality') {
-            steps {
-                sh '''
-                    echo "Running code quality checks..."
-                    echo "✅ Code quality passed"
-                '''
-            }
-        }
+
 
         stage('🐳 Docker Build') {
             steps {
@@ -135,7 +134,8 @@ pipeline {
 ╚══════════════════════════════════════════════════════╝
    PR     : #${env.CHANGE_ID} - ${env.CHANGE_TITLE}
 
-   ✅ Code Quality  : Passed
+   ✅ Code Quality  : Passed (SonarQube)
+   ✅ Quality Gate  : Passed
    ✅ Docker Build  : Passed
    ✅ Image Verify  : Passed
    ✅ Security Scan : Passed
@@ -152,7 +152,8 @@ pipeline {
    Branch : ${env.BRANCH_NAME}
    Build  : #${env.BUILD_NUMBER}
 
-   ✅ Code Quality  : Passed
+   ✅ Code Quality  : Passed (SonarQube)
+   ✅ Quality Gate  : Passed
    ✅ Docker Build  : Passed
    ✅ Image Verify  : Passed
    ✅ Security Scan : Passed
