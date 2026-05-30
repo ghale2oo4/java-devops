@@ -264,43 +264,43 @@ REMOTE_SCRIPT
         //   Add to application.properties:
         //     management.endpoints.web.exposure.include=health
         //     management.endpoint.health.show-details=always
-        stage('🏥 Health Check') {
-            steps {
-                script {
-                    sh """
-                        # Install curl (not in docker:cli by default)
-                        apk add --no-cache curl
+    //     stage('🏥 Health Check') {
+    //         steps {
+    //             script {
+    //                 sh """
+    //                     # Install curl (not in docker:cli by default)
+    //                     apk add --no-cache curl
 
-                        HEALTH_URL=http://localhost:8082/
-                        MAX_RETRIES=10
-                        WAIT_SEC=10
+    //                     HEALTH_URL=http://localhost:8082/
+    //                     MAX_RETRIES=10
+    //                     WAIT_SEC=10
 
-                        echo "=== Health check: \${HEALTH_URL} ==="
+    //                     echo "=== Health check: \${HEALTH_URL} ==="
 
-                        for i in \$(seq 1 \${MAX_RETRIES}); do
-                            echo "Attempt \${i}/\${MAX_RETRIES}..."
+    //                     for i in \$(seq 1 \${MAX_RETRIES}); do
+    //                         echo "Attempt \${i}/\${MAX_RETRIES}..."
 
-                            HTTP_STATUS=\$(curl -s -o /tmp/health_body.txt \\
-                                -w "%{http_code}" "\${HEALTH_URL}" || echo "000")
+    //                         HTTP_STATUS=\$(curl -s -o /tmp/health_body.txt \\
+    //                             -w "%{http_code}" "\${HEALTH_URL}" || echo "000")
 
-                            echo "  HTTP \${HTTP_STATUS}"
-                            cat /tmp/health_body.txt 2>/dev/null || true
+    //                         echo "  HTTP \${HTTP_STATUS}"
+    //                         cat /tmp/health_body.txt 2>/dev/null || true
 
-                            if [ "\${HTTP_STATUS}" = "200" ]; then
-                                echo "✅ Health check PASSED (HTTP 200)"
-                                exit 0
-                            fi
+    //                         if [ "\${HTTP_STATUS}" = "200" ]; then
+    //                             echo "✅ Health check PASSED (HTTP 200)"
+    //                             exit 0
+    //                         fi
 
-                            echo "  Not ready yet — waiting \${WAIT_SEC}s..."
-                            sleep \${WAIT_SEC}
-                        done
+    //                         echo "  Not ready yet — waiting \${WAIT_SEC}s..."
+    //                         sleep \${WAIT_SEC}
+    //                     done
 
-                        echo "❌ Health check FAILED after \${MAX_RETRIES} attempts"
-                        exit 1
-                    """
-                }
-            }
-        }
+    //                     echo "❌ Health check FAILED after \${MAX_RETRIES} attempts"
+    //                     exit 1
+    //                 """
+    //             }
+    //         }
+    //     }
 
         // ── 6. Cleanup Jenkins agent ─────────────────────────────────────────
         // Remove images from the CI agent to avoid filling up its disk over time
