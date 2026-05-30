@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.devops_java;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
