@@ -271,7 +271,7 @@ REMOTE_SCRIPT
                         # Install curl (not in docker:cli by default)
                         apk add --no-cache curl
 
-                        HEALTH_URL="http://${DEPLOY_SERVER}:${APP_PORT}/actuator/health"
+                        HEALTH_URL="http://localhost:${APP_PORT}/"
                         MAX_RETRIES=10
                         WAIT_SEC=10
 
