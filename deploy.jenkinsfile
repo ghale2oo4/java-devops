@@ -271,7 +271,7 @@ REMOTE_SCRIPT
                         # Install curl (not in docker:cli by default)
                         apk add --no-cache curl
 
-                        HEALTH_URL="http://localhost:${APP_PORT}/"
+                        HEALTH_URL=http://localhost:8082/
                         MAX_RETRIES=10
                         WAIT_SEC=10
 
