@@ -29,7 +29,7 @@ pipeline {
 
         // EC2 deployment target
         DEPLOY_SERVER = '52.91.225.101'
-        DEPLOY_USER   = 'jenkins'
+        DEPLOY_USER   = 'ubuntu'
         DEPLOY_PORT   = '22'
 
         // APP_PORT = port exposed on EC2 host
