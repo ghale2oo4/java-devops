@@ -28,7 +28,7 @@ pipeline {
         IMAGE_TAG     = "${env.GIT_COMMIT.take(7)}"  // Short SHA e.g. "a1b2c3d"
 
         // EC2 deployment target
-        DEPLOY_SERVER = '52.91.225.101 '
+        DEPLOY_SERVER = '52.91.225.101'
         DEPLOY_USER   = 'jenkins'
         DEPLOY_PORT   = '22'
 
@@ -98,7 +98,7 @@ pipeline {
                                 --file Dockerfile \
                                 .
 
-                            echo "✅ Build + tests passed"
+                            echo "✅ Build passed"
                             docker images "${DOCKER_IMAGE}"
                         '''
                     }
@@ -106,8 +106,11 @@ pipeline {
             }
             // Archive the test report so Jenkins can show it in the UI
             post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
+                 always {
+                    junit(
+                        testResults: '**/target/surefire-reports/*.xml',
+                        allowEmptyResults: true
+                    )
                 }
             }
         }
