@@ -28,7 +28,7 @@ pipeline {
         IMAGE_TAG     = "${env.GIT_COMMIT.take(7)}"  // Short SHA e.g. "a1b2c3d"
 
         // EC2 deployment target
-        DEPLOY_SERVER = '54.82.82.117'
+        DEPLOY_SERVER = '3.89.211.235'
         DEPLOY_USER   = 'ubuntu'
         DEPLOY_PORT   = '22'
 
